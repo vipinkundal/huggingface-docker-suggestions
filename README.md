@@ -7,4 +7,4 @@ Use following to build:-
 `docker build -t local-fastapi .`
 
 Use following to run:-
-`docker run --name suggestions -p 5001:5001 local-fastapi`
+`docker run -p 5001:5001 local-fastapi`
