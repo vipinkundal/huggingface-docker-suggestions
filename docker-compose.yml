@@ -1,0 +1,13 @@
+version: "3"
+services:
+  suggestions:
+    image: suggestion-image
+    build: 
+      context: .
+      network: host
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: ai_suggestion_model
+    volumes:
+      - '.:/var/www/html'

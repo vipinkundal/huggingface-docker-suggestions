@@ -4,7 +4,7 @@
 
 
 Use following to build:-
-`docker build -t local-fastapi .`
+`docker build -t suggestion-image .`
 
 Use following to run:-
-`docker run -p 5001:5001 local-fastapi`
+`docker run -p 5001:5001 suggestion-image`

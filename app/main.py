@@ -1,3 +1,4 @@
+import uvicorn
 import logging
 import os
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,8 +41,11 @@ def root():
 @app.post('/generate')
 def predict(body: Body):
 	# generated_output = generator(body.text, max_length=35, num_return_sequences=1)
-	# generated_output = generator(body.text, max_length=35, num_return_sequences=1)
 	# output_text = tokenizer.decode(generated_output[0], skip_special_tokens=True)
 	model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 	embeddings = model.encode(sentences)
 	return embeddings
+
+
+# if __name__ == "__main__":
+#     uvicorn.run('main:app', host="0.0.0.0", reload=True, debug=True)

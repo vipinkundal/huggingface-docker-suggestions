@@ -1,8 +1,10 @@
 FROM python:3.10.9
 
-COPY . .
+EXPOSE 5002
 
-WORKDIR /
+COPY ./requirements.txt /app/requirements.txt
+
+WORKDIR /app
 
 RUN pip install --upgrade pip setuptools wheel
 
@@ -12,6 +14,8 @@ RUN pip install -U sentence-transformers
 
 RUN pip install -r requirements.txt
 
+COPY app/* /app
+
 # ENTRYPOINT [ "uvicorn" ]
 
-CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "5001", "--reload"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
