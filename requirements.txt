@@ -3,4 +3,5 @@ tensorflow==2.16.1
 keras==3.4.1
 fastapi==0.111.0
 h5py==3.11.0
+torch==2.3.1
 uvicorn[standard]
