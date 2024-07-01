@@ -36,7 +36,7 @@ class Body(BaseModel):
 
 @app.get('/')
 def root():
-	return Response('-- HOME --')
+	return Response('-- FASTAPI working --')
 
 @app.post('/generate')
 def predict(body: Body):
