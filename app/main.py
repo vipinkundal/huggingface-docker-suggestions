@@ -33,31 +33,30 @@ app.add_middleware(
     allow_headers=["Origin, X-Requested-With, Content-Type, Accept"],
 )
 
-# class Body(BaseModel):
-# 	source_sentence: str
-# 	sentences: List[str]
-
 @app.get('/')
 def root():
 	return Response('-- FASTAPI working --')
 
 @app.post('/suggestion')
 def predict(query: str, sentences: List[str]):
-	# generated_output = generator(body.text, max_length=35, num_return_sequences=1)
-	# output_text = tokenizer.decode(generated_output[0], skip_special_tokens=True)
-	model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-	# print(body.query)
 
+	model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+	
+	#encode query
 	query_embedding = model.encode(query)
-	# print('1 - ', query_embedding)
+
+	#encode all available sentences from which we search query
 	content_embeddings = model.encode(sentences)
-	# print('2 - ', content_embeddings)
+	
+	#it will score between query and sentences
 	similarity_scores = model.similarity(query_embedding, content_embeddings)[0]
 
+	#pick 5 top most scores
 	top_k = min(5, len(content_embeddings))
 	scores, indices = torch.topk(similarity_scores, k=top_k)
 
 	output = []
+	#for top 5 render sentence with score
 	for score, idx in zip(scores, indices):
 	  output.append(sentences[idx] + " - (Score: {:.4f})".format(score))
 

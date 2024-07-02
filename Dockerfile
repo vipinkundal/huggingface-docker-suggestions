@@ -1,6 +1,6 @@
 FROM python:3.10.9
 
-EXPOSE 5002
+EXPOSE 8000
 
 COPY ./requirements.txt /app/requirements.txt
 
